@@ -12,143 +12,152 @@
         }
 
         body {
-            font-family: 'Arial', sans-serif;
-            background: #0a0a0a;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #0f0f23, #1a1a2e);
             color: white;
-            overflow: hidden;
+            min-height: 100vh;
+            overflow-x: hidden;
         }
 
         .container {
             display: grid;
-            grid-template-columns: 60px 250px 1fr 300px;
-            grid-template-rows: 50px 1fr 200px;
+            grid-template-columns: 280px 1fr 320px;
+            grid-template-rows: 60px 1fr 220px;
             height: 100vh;
-            gap: 1px;
-            background: #1a1a1a;
+            gap: 2px;
+            background: #16213e;
         }
 
         .header {
             grid-column: 1 / -1;
-            background: #2a2a2a;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
             display: flex;
             align-items: center;
-            padding: 0 20px;
+            padding: 0 25px;
             justify-content: space-between;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
         }
 
         .logo {
-            font-size: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 20px;
             font-weight: bold;
-            color: #ff6b35;
+            color: white;
+        }
+
+        .logo-icon {
+            font-size: 24px;
+            animation: rotate 3s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
         .header-controls {
             display: flex;
-            gap: 10px;
+            gap: 12px;
         }
 
         .btn {
-            padding: 8px 16px;
+            padding: 10px 20px;
             border: none;
-            border-radius: 6px;
-            background: #ff6b35;
+            border-radius: 8px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
             cursor: pointer;
-            font-size: 12px;
-            transition: all 0.2s;
+            font-size: 13px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .btn:hover {
-            background: #e55a2b;
-            transform: translateY(-1px);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
         }
 
         .btn-secondary {
-            background: #404040;
+            background: linear-gradient(135deg, #434343, #000000);
         }
 
         .btn-secondary:hover {
-            background: #505050;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
         }
 
-        .toolbar {
-            background: #1e1e1e;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px 0;
-            gap: 15px;
-        }
-
-        .tool-icon {
-            width: 40px;
-            height: 40px;
-            background: #333;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.2s;
-            font-size: 18px;
-        }
-
-        .tool-icon:hover, .tool-icon.active {
-            background: #ff6b35;
-            transform: scale(1.1);
-        }
-
-        .media-library {
-            background: #1a1a1a;
-            padding: 20px;
+        .media-panel {
+            background: linear-gradient(180deg, #1a1a2e, #16213e);
+            padding: 25px;
             overflow-y: auto;
+            border-right: 1px solid #2a3f5f;
         }
 
         .section-title {
-            font-size: 14px;
+            font-size: 16px;
             font-weight: bold;
-            margin-bottom: 15px;
-            color: #ccc;
+            margin-bottom: 20px;
+            color: #64b3f4;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .upload-area {
+            border: 2px dashed #4a90e2;
+            border-radius: 12px;
+            padding: 30px 20px;
+            text-align: center;
+            cursor: pointer;
+            margin-bottom: 25px;
+            transition: all 0.3s ease;
+            background: rgba(74, 144, 226, 0.05);
+        }
+
+        .upload-area:hover {
+            border-color: #64b3f4;
+            background: rgba(74, 144, 226, 0.15);
+            transform: scale(1.02);
+        }
+
+        .upload-icon {
+            font-size: 32px;
+            margin-bottom: 10px;
+            display: block;
         }
 
         .media-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-            gap: 10px;
+            grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+            gap: 12px;
             margin-bottom: 30px;
         }
 
         .media-item {
             aspect-ratio: 16/9;
-            background: #333;
-            border-radius: 6px;
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            border-radius: 8px;
             cursor: pointer;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            transition: all 0.2s;
+            transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+            border: 2px solid transparent;
         }
 
         .media-item:hover {
             transform: scale(1.05);
-            background: #444;
+            border-color: #4a90e2;
+            box-shadow: 0 5px 20px rgba(74, 144, 226, 0.3);
         }
 
-        .upload-area {
-            border: 2px dashed #444;
-            border-radius: 8px;
-            padding: 20px;
-            text-align: center;
-            cursor: pointer;
-            margin-bottom: 20px;
-            transition: all 0.2s;
-        }
-
-        .upload-area:hover {
-            border-color: #ff6b35;
-            background: rgba(255, 107, 53, 0.1);
+        .media-item.loaded {
+            background: linear-gradient(135deg, #667eea, #764ba2);
         }
 
         .preview-area {
@@ -156,770 +165,467 @@
             display: flex;
             flex-direction: column;
             position: relative;
+            border-radius: 0;
         }
 
-        .video-preview {
+        .video-container {
             flex: 1;
-            background: #111;
+            background: radial-gradient(circle, #1a1a2e, #000);
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
+            min-height: 400px;
         }
 
         .preview-video {
-            max-width: 100%;
-            max-height: 100%;
-            border-radius: 8px;
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
         .preview-placeholder {
-            color: #666;
+            text-align: center;
+            color: #64b3f4;
             font-size: 18px;
+            font-weight: 300;
         }
 
-        .playback-controls {
-            background: #1a1a1a;
-            padding: 15px;
+        .placeholder-icon {
+            font-size: 64px;
+            margin-bottom: 20px;
+            opacity: 0.7;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 0.3; }
+        }
+
+        .controls-panel {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            padding: 20px;
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 20px;
+            border-top: 1px solid #4a90e2;
         }
 
         .play-btn {
-            width: 40px;
-            height: 40px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
-            background: #ff6b35;
+            background: linear-gradient(135deg, #667eea, #764ba2);
             border: none;
             color: white;
-            font-size: 16px;
+            font-size: 18px;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .play-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
         }
 
         .time-display {
-            font-size: 12px;
-            color: #ccc;
+            font-size: 14px;
+            color: #64b3f4;
+            font-weight: 500;
+            min-width: 100px;
+        }
+
+        .volume-control {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex: 1;
+        }
+
+        .slider {
+            flex: 1;
+            height: 4px;
+            border-radius: 2px;
+            background: #4a90e2;
+            outline: none;
+            cursor: pointer;
         }
 
         .properties-panel {
-            background: #1a1a1a;
-            padding: 20px;
+            background: linear-gradient(180deg, #1a1a2e, #16213e);
+            padding: 25px;
             overflow-y: auto;
+            border-left: 1px solid #2a3f5f;
         }
 
         .property-group {
-            margin-bottom: 25px;
+            background: rgba(74, 144, 226, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(74, 144, 226, 0.2);
         }
 
         .property-group h3 {
-            font-size: 14px;
-            margin-bottom: 10px;
-            color: #ff6b35;
+            font-size: 16px;
+            margin-bottom: 15px;
+            color: #64b3f4;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .property-item {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 15px;
         }
 
         .property-item label {
-            font-size: 12px;
-            color: #ccc;
+            font-size: 13px;
+            color: #a0a0a0;
+            font-weight: 500;
         }
 
         .property-input {
-            width: 80px;
-            padding: 4px 8px;
-            border: 1px solid #444;
-            border-radius: 4px;
-            background: #2a2a2a;
+            padding: 8px 12px;
+            border: 1px solid #4a90e2;
+            border-radius: 6px;
+            background: rgba(74, 144, 226, 0.1);
             color: white;
-            font-size: 12px;
+            font-size: 13px;
         }
 
-        .slider {
+        .property-slider {
             width: 100%;
-            margin: 10px 0;
+            height: 6px;
+            border-radius: 3px;
+            background: #4a90e2;
+            outline: none;
+            cursor: pointer;
         }
 
         .timeline {
             grid-column: 1 / -1;
-            background: #1a1a1a;
-            border-top: 1px solid #333;
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            border-top: 2px solid #4a90e2;
             display: flex;
             flex-direction: column;
         }
 
         .timeline-header {
-            background: #2a2a2a;
-            padding: 10px 20px;
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            padding: 15px 25px;
             display: flex;
             align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #4a90e2;
+        }
+
+        .timeline-content {
+            flex: 1;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
             gap: 15px;
         }
 
-        .timeline-ruler {
-            height: 30px;
-            background: #1e1e1e;
-            position: relative;
-            border-bottom: 1px solid #333;
-        }
-
-        .timeline-tracks {
-            flex: 1;
-            overflow-y: auto;
-            padding: 10px;
-        }
-
         .track {
-            height: 60px;
-            background: #222;
-            border-radius: 6px;
-            margin-bottom: 8px;
+            height: 80px;
+            background: rgba(74, 144, 226, 0.1);
+            border-radius: 10px;
             position: relative;
             display: flex;
             align-items: center;
-            padding: 0 10px;
+            padding: 0 15px;
+            border: 1px solid rgba(74, 144, 226, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .track:hover {
+            background: rgba(74, 144, 226, 0.2);
         }
 
         .track-label {
-            width: 80px;
-            font-size: 12px;
-            color: #ccc;
+            width: 100px;
+            font-size: 14px;
+            color: #64b3f4;
+            font-weight: 600;
             text-align: center;
         }
 
         .track-content {
             flex: 1;
-            height: 40px;
-            background: #2a2a2a;
-            border-radius: 4px;
+            height: 50px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 8px;
             position: relative;
-            margin-left: 10px;
-        }
-
-        .clip {
-            position: absolute;
-            height: 100%;
-            background: linear-gradient(135deg, #ff6b35, #e55a2b);
-            border-radius: 4px;
+            margin-left: 15px;
+            border: 1px dashed #4a90e2;
             display: flex;
             align-items: center;
-            padding: 0 8px;
-            font-size: 11px;
-            cursor: grab;
-            user-select: none;
-            transition: all 0.2s;
-        }
-
-        .clip:hover {
-            transform: scale(1.02);
-            box-shadow: 0 2px 10px rgba(255, 107, 53, 0.3);
-        }
-
-        .clip.selected {
-            outline: 2px solid #fff;
-        }
-
-        .playhead {
-            position: absolute;
-            top: 0;
-            width: 2px;
-            height: 100%;
-            background: #fff;
-            pointer-events: none;
-            z-index: 10;
+            justify-content: center;
+            color: #64b3f4;
+            font-size: 12px;
         }
 
         .effects-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 8px;
-        }
-
-        .effect-btn {
-            padding: 8px;
-            background: #333;
-            border: none;
-            border-radius: 4px;
-            color: white;
-            font-size: 11px;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .effect-btn:hover {
-            background: #ff6b35;
-        }
-
-        .zoom-controls {
-            display: flex;
-            align-items: center;
             gap: 10px;
         }
 
-        .zoom-btn {
-            width: 25px;
-            height: 25px;
+        .effect-btn {
+            padding: 12px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
             border: none;
-            background: #404040;
+            border-radius: 8px;
             color: white;
-            border-radius: 4px;
+            font-size: 12px;
             cursor: pointer;
-            font-size: 14px;
+            transition: all 0.3s ease;
+            font-weight: 600;
         }
 
-        .export-panel {
+        .effect-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .notification {
             position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: #2a2a2a;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            top: 80px;
+            right: 25px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
             z-index: 1000;
-            display: none;
+            transform: translateX(400px);
+            opacity: 0;
+            transition: all 0.4s ease;
         }
 
-        .export-panel.show {
-            display: block;
+        .notification.show {
+            transform: translateX(0);
+            opacity: 1;
         }
 
-        .overlay {
+        .status-bar {
             position: fixed;
-            top: 0;
+            bottom: 0;
             left: 0;
             right: 0;
-            bottom: 0;
-            background: rgba(0,0,0,0.7);
-            z-index: 999;
-            display: none;
+            height: 3px;
+            background: #4a90e2;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
         }
 
-        .overlay.show {
-            display: block;
+        .status-bar.loading {
+            animation: loading 2s ease-in-out infinite;
         }
 
-        .progress-bar {
-            width: 100%;
-            height: 4px;
-            background: #404040;
-            border-radius: 2px;
-            overflow: hidden;
-            margin: 15px 0;
+        @keyframes loading {
+            0%, 100% { transform: scaleX(0); }
+            50% { transform: scaleX(1); }
         }
 
-        .progress-fill {
-            height: 100%;
-            background: #ff6b35;
-            transition: width 0.3s;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-
-        .processing {
-            animation: pulse 1.5s infinite;
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+                grid-template-rows: 60px 200px 1fr 150px;
+            }
+            
+            .media-panel, .properties-panel {
+                display: none;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <header class="header">
-            <div class="logo">🎬 VideoEdit Pro</div>
+            <div class="logo">
+                <span class="logo-icon">🎬</span>
+                <span>VideoEdit Pro</span>
+            </div>
             <div class="header-controls">
-                <button class="btn btn-secondary">Nouveau</button>
-                <button class="btn btn-secondary">Ouvrir</button>
-                <button class="btn btn-secondary">Sauvegarder</button>
-                <button class="btn" onclick="showExportPanel()">Exporter</button>
+                <button class="btn btn-secondary" onclick="newProject()">Nouveau</button>
+                <button class="btn btn-secondary" onclick="saveProject()">Sauvegarder</button>
+                <button class="btn" onclick="exportVideo()">Exporter</button>
             </div>
         </header>
 
-        <div class="toolbar">
-            <div class="tool-icon active" title="Sélection" data-tool="select">⛶</div>
-            <div class="tool-icon" title="Découper" data-tool="cut">✂</div>
-            <div class="tool-icon" title="Texte" data-tool="text">T</div>
-            <div class="tool-icon" title="Effets" data-tool="effects">✨</div>
-            <div class="tool-icon" title="Audio" data-tool="audio">🎵</div>
-            <div class="tool-icon" title="Transitions" data-tool="transitions">⚡</div>
-        </div>
-
-        <div class="media-library">
-            <div class="section-title">Médias</div>
+        <div class="media-panel">
+            <div class="section-title">📁 Médias</div>
             <div class="upload-area" onclick="document.getElementById('fileInput').click()">
-                <div>📁 Cliquer pour ajouter des médias</div>
-                <small style="color: #666;">Vidéos, images, audio</small>
+                <span class="upload-icon">📤</span>
+                <div>Cliquez pour ajouter des médias</div>
+                <small style="color: #a0a0a0; margin-top: 5px; display: block;">Vidéos, images, audio</small>
             </div>
             <input type="file" id="fileInput" multiple accept="video/*,image/*,audio/*" style="display: none;">
             
             <div class="media-grid" id="mediaGrid">
-                <!-- Les médias uploadés apparaîtront ici -->
+                <!-- Médias ajoutés ici -->
             </div>
 
-            <div class="section-title">Effets</div>
+            <div class="section-title">✨ Effets</div>
             <div class="effects-grid">
-                <button class="effect-btn" onclick="applyEffect('blur')">Flou</button>
-                <button class="effect-btn" onclick="applyEffect('sepia')">Sépia</button>
-                <button class="effect-btn" onclick="applyEffect('brightness')">Luminosité</button>
-                <button class="effect-btn" onclick="applyEffect('contrast')">Contraste</button>
-                <button class="effect-btn" onclick="applyEffect('saturate')">Saturation</button>
-                <button class="effect-btn" onclick="applyEffect('invert')">Inverser</button>
+                <button class="effect-btn" onclick="applyEffect('blur')">🌫️ Flou</button>
+                <button class="effect-btn" onclick="applyEffect('sepia')">🟤 Sépia</button>
+                <button class="effect-btn" onclick="applyEffect('brightness')">☀️ Luminosité</button>
+                <button class="effect-btn" onclick="applyEffect('contrast')">⚡ Contraste</button>
+                <button class="effect-btn" onclick="applyEffect('saturate')">🌈 Saturation</button>
+                <button class="effect-btn" onclick="applyEffect('invert')">🔄 Inverser</button>
             </div>
         </div>
 
         <div class="preview-area">
-            <div class="video-preview">
-                <video id="previewVideo" class="preview-video" style="display: none;"></video>
+            <div class="video-container">
+                <video id="previewVideo" class="preview-video" style="display: none;" controls></video>
                 <div id="previewPlaceholder" class="preview-placeholder">
-                    Ajoutez un média pour commencer
+                    <div class="placeholder-icon">🎥</div>
+                    <div>Ajoutez un média pour commencer l'édition</div>
+                    <small style="opacity: 0.7;">Glissez-déposez vos fichiers ou utilisez le panneau de gauche</small>
                 </div>
             </div>
-            <div class="playback-controls">
-                <button class="play-btn" id="playBtn" onclick="togglePlayback()">▶</button>
+            <div class="controls-panel">
+                <button class="play-btn" id="playBtn" onclick="togglePlay()">▶</button>
                 <span class="time-display" id="timeDisplay">00:00 / 00:00</span>
-                <div class="zoom-controls">
-                    <button class="zoom-btn" onclick="adjustZoom(-10)">-</button>
-                    <span style="font-size: 12px;">100%</span>
-                    <button class="zoom-btn" onclick="adjustZoom(10)">+</button>
+                <div class="volume-control">
+                    <span>🔊</span>
+                    <input type="range" class="slider" id="volumeSlider" min="0" max="100" value="100" onchange="updateVolume(this.value)">
                 </div>
             </div>
         </div>
 
         <div class="properties-panel">
             <div class="property-group">
-                <h3>Vidéo</h3>
+                <h3>🎨 Apparence</h3>
                 <div class="property-item">
                     <label>Opacité:</label>
-                    <input type="range" class="slider" min="0" max="100" value="100" onchange="updateProperty('opacity', this.value)">
+                    <input type="range" class="property-slider" min="0" max="100" value="100" onchange="updateProperty('opacity', this.value)">
                 </div>
-                <div class="property-item">
-                    <label>Échelle:</label>
-                    <input type="range" class="slider" min="50" max="200" value="100" onchange="updateProperty('scale', this.value)">
-                </div>
-                <div class="property-item">
-                    <label>Rotation:</label>
-                    <input type="range" class="slider" min="-180" max="180" value="0" onchange="updateProperty('rotation', this.value)">
-                </div>
-            </div>
-
-            <div class="property-group">
-                <h3>Audio</h3>
-                <div class="property-item">
-                    <label>Volume:</label>
-                    <input type="range" class="slider" min="0" max="200" value="100" onchange="updateProperty('volume', this.value)">
-                </div>
-                <div class="property-item">
-                    <label>Vitesse:</label>
-                    <input type="range" class="slider" min="25" max="400" value="100" onchange="updateProperty('speed', this.value)">
-                </div>
-            </div>
-
-            <div class="property-group">
-                <h3>Couleur</h3>
                 <div class="property-item">
                     <label>Luminosité:</label>
-                    <input type="range" class="slider" min="0" max="200" value="100" onchange="updateProperty('brightness', this.value)">
+                    <input type="range" class="property-slider" min="0" max="200" value="100" onchange="updateProperty('brightness', this.value)">
                 </div>
                 <div class="property-item">
                     <label>Contraste:</label>
-                    <input type="range" class="slider" min="0" max="200" value="100" onchange="updateProperty('contrast', this.value)">
+                    <input type="range" class="property-slider" min="0" max="200" value="100" onchange="updateProperty('contrast', this.value)">
+                </div>
+            </div>
+
+            <div class="property-group">
+                <h3>🎵 Audio</h3>
+                <div class="property-item">
+                    <label>Volume:</label>
+                    <input type="range" class="property-slider" min="0" max="100" value="100" onchange="updateVolume(this.value)">
                 </div>
                 <div class="property-item">
-                    <label>Saturation:</label>
-                    <input type="range" class="slider" min="0" max="200" value="100" onchange="updateProperty('saturation', this.value)">
+                    <label>Vitesse:</label>
+                    <input type="range" class="property-slider" min="25" max="200" value="100" onchange="updateSpeed(this.value)">
+                </div>
+            </div>
+
+            <div class="property-group">
+                <h3>📐 Transformation</h3>
+                <div class="property-item">
+                    <label>Échelle:</label>
+                    <input type="range" class="property-slider" min="50" max="200" value="100" onchange="updateProperty('scale', this.value)">
+                </div>
+                <div class="property-item">
+                    <label>Rotation:</label>
+                    <input type="range" class="property-slider" min="-180" max="180" value="0" onchange="updateProperty('rotation', this.value)">
                 </div>
             </div>
         </div>
 
         <div class="timeline">
             <div class="timeline-header">
-                <div class="section-title">Timeline</div>
-                <div class="zoom-controls">
-                    <button class="zoom-btn" onclick="zoomTimeline(-1)">-</button>
-                    <button class="zoom-btn" onclick="zoomTimeline(1)">+</button>
+                <div class="section-title">⏱️ Timeline</div>
+                <div>
+                    <button class="btn btn-secondary" onclick="addTextLayer()">➕ Ajouter Texte</button>
                 </div>
             </div>
-            <div class="timeline-ruler">
-                <div class="playhead" id="playhead" style="left: 0px;"></div>
-            </div>
-            <div class="timeline-tracks" id="timelineTracks">
+            <div class="timeline-content">
                 <div class="track">
-                    <div class="track-label">Vidéo 1</div>
-                    <div class="track-content" id="videoTrack1"></div>
+                    <div class="track-label">🎬 Vidéo</div>
+                    <div class="track-content" ondrop="dropHandler(event)" ondragover="allowDrop(event)">
+                        Glissez vos vidéos ici
+                    </div>
                 </div>
                 <div class="track">
-                    <div class="track-label">Audio 1</div>
-                    <div class="track-content" id="audioTrack1"></div>
+                    <div class="track-label">🎵 Audio</div>
+                    <div class="track-content" ondrop="dropHandler(event)" ondragover="allowDrop(event)">
+                        Glissez vos audios ici
+                    </div>
                 </div>
                 <div class="track">
-                    <div class="track-label">Titres</div>
-                    <div class="track-content" id="textTrack"></div>
+                    <div class="track-label">📝 Texte</div>
+                    <div class="track-content" id="textTrack">
+                        Cliquez pour ajouter du texte
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="overlay" id="overlay" onclick="hideExportPanel()"></div>
-    <div class="export-panel" id="exportPanel">
-        <h2 style="margin-bottom: 20px;">Exporter la vidéo</h2>
-        <div class="property-item">
-            <label>Qualité:</label>
-            <select class="property-input">
-                <option>1080p HD</option>
-                <option>720p</option>
-                <option>480p</option>
-                <option>4K UHD</option>
-            </select>
-        </div>
-        <div class="property-item">
-            <label>Format:</label>
-            <select class="property-input">
-                <option>MP4</option>
-                <option>MOV</option>
-                <option>AVI</option>
-                <option>WebM</option>
-            </select>
-        </div>
-        <div class="progress-bar">
-            <div class="progress-fill" style="width: 0%"></div>
-        </div>
-        <div style="display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px;">
-            <button class="btn btn-secondary" onclick="hideExportPanel()">Annuler</button>
-            <button class="btn" onclick="startExport()">Exporter</button>
-        </div>
-    </div>
+    <div class="status-bar" id="statusBar"></div>
 
     <script>
-        let currentMedia = null;
+        let currentVideo = null;
         let isPlaying = false;
-        let timelineZoom = 1;
-        let clips = [];
-        let selectedClip = null;
-        let playheadPosition = 0;
+        let currentEffects = {};
 
         // Initialisation
         document.addEventListener('DOMContentLoaded', function() {
+            showNotification('🎉 Bienvenue dans VideoEdit Pro !');
             setupEventListeners();
-            updateTimeDisplay();
         });
 
         function setupEventListeners() {
             const fileInput = document.getElementById('fileInput');
-            fileInput.addEventListener('change', handleFileUpload);
+            fileInput.addEventListener('change', handleFileSelect);
 
-            // Outils
-            document.querySelectorAll('.tool-icon').forEach(tool => {
-                tool.addEventListener('click', function() {
-                    document.querySelectorAll('.tool-icon').forEach(t => t.classList.remove('active'));
-                    this.classList.add('active');
-                });
+            // Drag & drop sur toute la page
+            document.addEventListener('dragover', function(e) {
+                e.preventDefault();
+                document.body.style.background = 'linear-gradient(135deg, #0f1419, #1a2332)';
             });
 
-            // Timeline click pour déplacer la playhead
-            const timelineRuler = document.querySelector('.timeline-ruler');
-            timelineRuler.addEventListener('click', function(e) {
-                const rect = this.getBoundingClientRect();
-                const position = (e.clientX - rect.left) / rect.width;
-                movePlayhead(position);
+            document.addEventListener('dragleave', function(e) {
+                if (!e.relatedTarget) {
+                    document.body.style.background = '';
+                }
+            });
+
+            document.addEventListener('drop', function(e) {
+                e.preventDefault();
+                document.body.style.background = '';
+                handleFileDrop(e);
             });
         }
 
-        function handleFileUpload(event) {
-            const files = event.target.files;
-            for (let file of files) {
-                addMediaToLibrary(file);
-            }
+        function handleFileSelect(event) {
+            const files = Array.from(event.target.files);
+            files.forEach(file => addMediaToLibrary(file));
+        }
+
+        function handleFileDrop(event) {
+            const files = Array.from(event.dataTransfer.files);
+            files.forEach(file => addMediaToLibrary(file));
         }
 
         function addMediaToLibrary(file) {
             const mediaGrid = document.getElementById('mediaGrid');
-            const mediaItem = document.createElement('div');
-            mediaItem.className = 'media-item';
-            mediaItem.draggable = true;
-            
-            const fileType = file.type.split('/')[0];
-            let icon = '';
-            
-            if (fileType === 'video') {
-                icon = '🎬';
-            } else if (fileType === 'image') {
-                icon = '🖼️';
-            } else if (fileType === 'audio') {
-                icon = '🎵';
-            }
-            
-            mediaItem.innerHTML = `
-                <div style="text-align: center;">
-                    <div style="font-size: 20px; margin-bottom: 5px;">${icon}</div>
-                    <div style="font-size: 10px; color: #ccc;">${file.name.substring(0, 10)}...</div>
-                </div>
-            `;
-
-            // Événements de drag & drop
-            mediaItem.addEventListener('dragstart', function(e) {
-                e.dataTransfer.setData('text/plain', JSON.stringify({
-                    name: file.name,
-                    type: fileType,
-                    url: URL.createObjectURL(file)
-                }));
-            });
-
-            mediaItem.addEventListener('click', function() {
-                previewMedia(file);
-            });
-
-            mediaGrid.appendChild(mediaItem);
-        }
-
-        function previewMedia(file) {
-            const previewVideo = document.getElementById('previewVideo');
-            const previewPlaceholder = document.getElementById('previewPlaceholder');
-            
-            if (file.type.startsWith('video/')) {
-                previewVideo.src = URL.createObjectURL(file);
-                previewVideo.style.display = 'block';
-                previewPlaceholder.style.display = 'none';
-                currentMedia = previewVideo;
-                
-                previewVideo.addEventListener('loadedmetadata', function() {
-                    updateTimeDisplay();
-                });
-            }
-        }
-
-        // Configuration du drag & drop sur la timeline
-        document.querySelectorAll('.track-content').forEach(track => {
-            track.addEventListener('dragover', function(e) {
-                e.preventDefault();
-                this.style.backgroundColor = '#404040';
-            });
-
-            track.addEventListener('dragleave', function() {
-                this.style.backgroundColor = '#2a2a2a';
-            });
-
-            track.addEventListener('drop', function(e) {
-                e.preventDefault();
-                this.style.backgroundColor = '#2a2a2a';
-                
-                const mediaData = JSON.parse(e.dataTransfer.getData('text/plain'));
-                addClipToTrack(this, mediaData, e.offsetX);
-            });
-        });
-
-        function addClipToTrack(track, mediaData, position) {
-            const clip = document.createElement('div');
-            clip.className = 'clip';
-            clip.style.left = position + 'px';
-            clip.style.width = '120px';
-            clip.textContent = mediaData.name.substring(0, 12);
-            
-            clip.addEventListener('click', function() {
-                selectClip(this);
-            });
-
-            // Rendre le clip déplaçable
-            makeDraggable(clip);
-            
-            track.appendChild(clip);
-            clips.push({
-                element: clip,
-                data: mediaData,
-                start: position,
-                duration: 120
-            });
-        }
-
-        function makeDraggable(element) {
-            let isDragging = false;
-            let startX = 0;
-            let startLeft = 0;
-
-            element.addEventListener('mousedown', function(e) {
-                isDragging = true;
-                startX = e.clientX;
-                startLeft = parseInt(element.style.left);
-                element.style.cursor = 'grabbing';
-            });
-
-            document.addEventListener('mousemove', function(e) {
-                if (!isDragging) return;
-                
-                const deltaX = e.clientX - startX;
-                const newLeft = Math.max(0, startLeft + deltaX);
-                element.style.left = newLeft + 'px';
-            });
-
-            document.addEventListener('mouseup', function() {
-                if (isDragging) {
-                    isDragging = false;
-                    element.style.cursor = 'grab';
-                }
-            });
-        }
-
-        function selectClip(clip) {
-            document.querySelectorAll('.clip').forEach(c => c.classList.remove('selected'));
-            clip.classList.add('selected');
-            selectedClip = clip;
-        }
-
-        function togglePlayback() {
-            const playBtn = document.getElementById('playBtn');
-            
-            if (currentMedia) {
-                if (isPlaying) {
-                    currentMedia.pause();
-                    playBtn.textContent = '▶';
-                } else {
-                    currentMedia.play();
-                    playBtn.textContent = '⏸';
-                }
-                isPlaying = !isPlaying;
-            }
-        }
-
-        function updateTimeDisplay() {
-            if (currentMedia) {
-                const current = formatTime(currentMedia.currentTime || 0);
-                const duration = formatTime(currentMedia.duration || 0);
-                document.getElementById('timeDisplay').textContent = `${current} / ${duration}`;
-                
-                // Mettre à jour la playhead
-                const progress = (currentMedia.currentTime || 0) / (currentMedia.duration || 1);
-                movePlayheadTo(progress);
-            }
-        }
-
-        function formatTime(seconds) {
-            const mins = Math.floor(seconds / 60);
-            const secs = Math.floor(seconds % 60);
-            return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
-        }
-
-        function movePlayhead(position) {
-            const playhead = document.getElementById('playhead');
-            const timelineRuler = document.querySelector('.timeline-ruler');
-            const newLeft = position * timelineRuler.offsetWidth;
-            playhead.style.left = newLeft + 'px';
-            
-            if (currentMedia) {
-                currentMedia.currentTime = position * (currentMedia.duration || 0);
-                updateTimeDisplay();
-            }
-        }
-
-        function movePlayheadTo(progress) {
-            const playhead = document.getElementById('playhead');
-            const timelineRuler = document.querySelector('.timeline-ruler');
-            const newLeft = progress * timelineRuler.offsetWidth;
-            playhead.style.left = newLeft + 'px';
-        }
-
-        function updateProperty(property, value) {
-            if (currentMedia && property !== 'volume' && property !== 'speed') {
-                let filterValue = '';
-                
-                switch(property) {
-                    case 'opacity':
-                        currentMedia.style.opacity = value / 100;
-                        break;
-                    case 'scale':
-                        currentMedia.style.transform = `scale(${value / 100})`;
-                        break;
-                    case 'rotation':
-                        currentMedia.style.transform = `rotate(${value}deg)`;
-                        break;
-                    case 'brightness':
-                        filterValue += `brightness(${value}%) `;
-                        break;
-                    case 'contrast':
-                        filterValue += `contrast(${value}%) `;
-                        break;
-                    case 'saturation':
-                        filterValue += `saturate(${value}%) `;
-                        break;
-                }
-                
-                if (filterValue) {
-                    const currentFilter = currentMedia.style.filter || '';
-                    const newFilter = currentFilter.replace(new RegExp(property + '\\([^)]*\\)'), '').trim();
-                    currentMedia.style.filter = newFilter + ' ' + filterValue;
-                }
-            } else if (currentMedia && property === 'volume') {
-                currentMedia.volume = value / 100;
-            } else if (currentMedia && property === 'speed') {
-                currentMedia.playbackRate = value / 100;
-            }
-        }
-
-        function applyEffect(effect) {
-            if (!currentMedia) return;
-            
-            let filterValue = '';
-            
-            switch(effect) {
-                case 'blur':
-                    filterValue = 'blur(5px)';
-                    break;
-                case 'sepia':
-                    filterValue = 'sepia(100%)';
-                    break;
-                case 'brightness':
-                    filterValue = 'brightness(150%)';
-                    break;
-                case 'contrast':
-                    filterValue = 'contrast(150%)';
-                    break;
-                case 'saturate':
-                    filterValue = 'saturate(200%)';
-                    break;
-                case 'invert':
-                    filterValue = 'invert(100%)';
-                    break;
-            }
-            
-            const currentFilter = currentMedia.style.filter || '';
-            currentMedia.style.filter = currentFilter + ' ' + filterValue;
-        }
-
-        function adjustZoom(delta) {
-            // Logique de zoom pour la prévisualisation
-        }
-
-        function zoomTimeline(direction) {
-            timelineZoom += direction * 0.2;
-            timelineZoom = Math.max(0.5, Math.min(3, timelineZoom));
-            
-            document.querySelectorAll('.clip').forEach(clip => {
-                const currentWidth = parseInt(clip.style.width);
-                clip.style.width = (120 * timelineZoom) + 'px';
-            });
-        }
-
-        function showExportPanel() {
-            document.getElementById('overlay').classList.add('show');
-            document.getElementById('exportPanel').classList.add('show');
-        }
-
-        function hideExportPanel() {
-            document.getElementById('overlay').classList.remove('show');
-            document.getElementById('exportPanel').classList.remove('show');
-        }
-
-        function startExport() {
-            const progressFill = document.querySelector('.progress-fill');
-            const exportPanel = document.getElementById('exportPanel');
-            
-            exportPanel.classList.add('processing');
-            
-            let progress = 0;
+            const mediaI
