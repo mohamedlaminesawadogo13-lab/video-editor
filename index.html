@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VideoEdit Pro - Éditeur Vidéo</title>
+    <title>Éditeur Vidéo</title>
     <style>
         * {
             margin: 0;
@@ -13,619 +13,647 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #0f0f23, #1a1a2e);
-            color: white;
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
-
-        .container {
-            display: grid;
-            grid-template-columns: 280px 1fr 320px;
-            grid-template-rows: 60px 1fr 220px;
-            height: 100vh;
-            gap: 2px;
-            background: #16213e;
+            background: #000;
+            color: #fff;
+            overflow: hidden;
         }
 
         .header {
-            grid-column: 1 / -1;
-            background: linear-gradient(135deg, #1e3c72, #2a5298);
             display: flex;
-            align-items: center;
-            padding: 0 25px;
             justify-content: space-between;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            align-items: center;
+            padding: 10px 20px;
+            background: #111;
+            border-bottom: 1px solid #333;
         }
 
-        .logo {
+        .header-left {
             display: flex;
             align-items: center;
-            gap: 10px;
-            font-size: 20px;
-            font-weight: bold;
-            color: white;
+            gap: 15px;
         }
 
-        .logo-icon {
-            font-size: 24px;
-            animation: rotate 3s linear infinite;
-        }
-
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        .header-controls {
-            display: flex;
-            gap: 12px;
-        }
-
-        .btn {
-            padding: 10px 20px;
+        .close-btn {
+            background: none;
             border: none;
-            border-radius: 8px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
+            color: #fff;
+            font-size: 20px;
             cursor: pointer;
-            font-size: 13px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
         }
 
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        .search-bar {
+            display: flex;
+            align-items: center;
+            background: #333;
+            border-radius: 20px;
+            padding: 8px 15px;
+            gap: 10px;
         }
 
-        .btn-secondary {
-            background: linear-gradient(135deg, #434343, #000000);
+        .search-bar input {
+            background: none;
+            border: none;
+            color: #fff;
+            outline: none;
+            min-width: 200px;
         }
 
-        .btn-secondary:hover {
-            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+        .quality-selector {
+            background: #333;
+            color: #fff;
+            border: none;
+            border-radius: 15px;
+            padding: 8px 15px;
+            cursor: pointer;
         }
 
-        .media-panel {
-            background: linear-gradient(180deg, #1a1a2e, #16213e);
-            padding: 25px;
-            overflow-y: auto;
-            border-right: 1px solid #2a3f5f;
-        }
-
-        .section-title {
-            font-size: 16px;
+        .export-btn {
+            background: #00d4ff;
+            color: #000;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
             font-weight: bold;
-            margin-bottom: 20px;
-            color: #64b3f4;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .upload-area {
-            border: 2px dashed #4a90e2;
-            border-radius: 12px;
-            padding: 30px 20px;
-            text-align: center;
             cursor: pointer;
-            margin-bottom: 25px;
-            transition: all 0.3s ease;
-            background: rgba(74, 144, 226, 0.05);
         }
 
-        .upload-area:hover {
-            border-color: #64b3f4;
-            background: rgba(74, 144, 226, 0.15);
-            transform: scale(1.02);
+        .main-container {
+            display: flex;
+            height: calc(100vh - 60px);
         }
 
-        .upload-icon {
-            font-size: 32px;
-            margin-bottom: 10px;
-            display: block;
-        }
-
-        .media-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
-            gap: 12px;
-            margin-bottom: 30px;
-        }
-
-        .media-item {
-            aspect-ratio: 16/9;
-            background: linear-gradient(135deg, #2c3e50, #34495e);
-            border-radius: 8px;
-            cursor: pointer;
+        .sidebar {
+            width: 80px;
+            background: #111;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            border: 2px solid transparent;
+            padding: 20px 0;
+            gap: 30px;
         }
 
-        .media-item:hover {
-            transform: scale(1.05);
-            border-color: #4a90e2;
-            box-shadow: 0 5px 20px rgba(74, 144, 226, 0.3);
+        .sidebar-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 10px;
+            transition: background 0.2s;
         }
 
-        .media-item.loaded {
-            background: linear-gradient(135deg, #667eea, #764ba2);
+        .sidebar-item:hover, .sidebar-item.active {
+            background: #333;
+        }
+
+        .sidebar-icon {
+            width: 24px;
+            height: 24px;
+            background: #666;
+            border-radius: 3px;
+        }
+
+        .sidebar-text {
+            font-size: 10px;
+            color: #999;
+            text-align: center;
+        }
+
+        .content-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
         }
 
         .preview-area {
-            background: #000;
-            display: flex;
-            flex-direction: column;
-            position: relative;
-            border-radius: 0;
-        }
-
-        .video-container {
             flex: 1;
-            background: radial-gradient(circle, #1a1a2e, #000);
+            background: #222;
             display: flex;
-            align-items: center;
             justify-content: center;
+            align-items: center;
             position: relative;
-            min-height: 400px;
         }
 
-        .preview-video {
-            max-width: 90%;
-            max-height: 90%;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        .video-preview {
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: 10px;
         }
 
         .preview-placeholder {
-            text-align: center;
-            color: #64b3f4;
-            font-size: 18px;
-            font-weight: 300;
-        }
-
-        .placeholder-icon {
-            font-size: 64px;
-            margin-bottom: 20px;
-            opacity: 0.7;
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 0.7; }
-            50% { opacity: 0.3; }
-        }
-
-        .controls-panel {
-            background: linear-gradient(135deg, #2c3e50, #34495e);
-            padding: 20px;
+            width: 400px;
+            height: 225px;
+            background: #000;
+            border-radius: 10px;
             display: flex;
+            justify-content: center;
             align-items: center;
+            border: 2px dashed #555;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
             gap: 20px;
-            border-top: 1px solid #4a90e2;
+            background: #111;
+        }
+
+        .control-btn {
+            background: none;
+            border: none;
+            color: #fff;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background 0.2s;
+        }
+
+        .control-btn:hover {
+            background: #333;
         }
 
         .play-btn {
             width: 50px;
             height: 50px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            border: none;
-            color: white;
-            font-size: 18px;
-            cursor: pointer;
+            background: #00d4ff;
+            color: #000;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            font-size: 20px;
         }
 
-        .play-btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
-        }
-
-        .time-display {
-            font-size: 14px;
-            color: #64b3f4;
-            font-weight: 500;
-            min-width: 100px;
-        }
-
-        .volume-control {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            flex: 1;
-        }
-
-        .slider {
-            flex: 1;
-            height: 4px;
-            border-radius: 2px;
-            background: #4a90e2;
-            outline: none;
-            cursor: pointer;
-        }
-
-        .properties-panel {
-            background: linear-gradient(180deg, #1a1a2e, #16213e);
-            padding: 25px;
-            overflow-y: auto;
-            border-left: 1px solid #2a3f5f;
-        }
-
-        .property-group {
-            background: rgba(74, 144, 226, 0.1);
-            border-radius: 10px;
+        .timeline-area {
+            background: #111;
             padding: 20px;
-            margin-bottom: 20px;
-            border: 1px solid rgba(74, 144, 226, 0.2);
-        }
-
-        .property-group h3 {
-            font-size: 16px;
-            margin-bottom: 15px;
-            color: #64b3f4;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .property-item {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            margin-bottom: 15px;
-        }
-
-        .property-item label {
-            font-size: 13px;
-            color: #a0a0a0;
-            font-weight: 500;
-        }
-
-        .property-input {
-            padding: 8px 12px;
-            border: 1px solid #4a90e2;
-            border-radius: 6px;
-            background: rgba(74, 144, 226, 0.1);
-            color: white;
-            font-size: 13px;
-        }
-
-        .property-slider {
-            width: 100%;
-            height: 6px;
-            border-radius: 3px;
-            background: #4a90e2;
-            outline: none;
-            cursor: pointer;
-        }
-
-        .timeline {
-            grid-column: 1 / -1;
-            background: linear-gradient(135deg, #1a1a2e, #16213e);
-            border-top: 2px solid #4a90e2;
-            display: flex;
-            flex-direction: column;
+            border-top: 1px solid #333;
         }
 
         .timeline-header {
-            background: linear-gradient(135deg, #2c3e50, #34495e);
-            padding: 15px 25px;
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            border-bottom: 1px solid #4a90e2;
+            align-items: center;
+            margin-bottom: 15px;
         }
 
-        .timeline-content {
-            flex: 1;
-            padding: 20px;
+        .time-display {
+            color: #999;
+            font-family: monospace;
+        }
+
+        .timeline {
+            height: 100px;
+            background: #222;
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .timeline-track {
+            height: 30px;
+            background: #333;
+            margin: 5px;
+            border-radius: 5px;
+            position: relative;
+        }
+
+        .timeline-clip {
+            height: 100%;
+            background: linear-gradient(45deg, #00d4ff, #0099cc);
+            border-radius: 3px;
+            position: absolute;
+            cursor: grab;
+        }
+
+        .timeline-clip:active {
+            cursor: grabbing;
+        }
+
+        .bottom-toolbar {
+            display: flex;
+            justify-content: space-around;
+            padding: 15px;
+            background: #111;
+            border-top: 1px solid #333;
+        }
+
+        .toolbar-item {
             display: flex;
             flex-direction: column;
-            gap: 15px;
-        }
-
-        .track {
-            height: 80px;
-            background: rgba(74, 144, 226, 0.1);
-            border-radius: 10px;
-            position: relative;
-            display: flex;
             align-items: center;
-            padding: 0 15px;
-            border: 1px solid rgba(74, 144, 226, 0.2);
-            transition: all 0.3s ease;
-        }
-
-        .track:hover {
-            background: rgba(74, 144, 226, 0.2);
-        }
-
-        .track-label {
-            width: 100px;
-            font-size: 14px;
-            color: #64b3f4;
-            font-weight: 600;
-            text-align: center;
-        }
-
-        .track-content {
-            flex: 1;
-            height: 50px;
-            background: rgba(0,0,0,0.3);
-            border-radius: 8px;
-            position: relative;
-            margin-left: 15px;
-            border: 1px dashed #4a90e2;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #64b3f4;
-            font-size: 12px;
-        }
-
-        .effects-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-        }
-
-        .effect-btn {
-            padding: 12px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            border: none;
-            border-radius: 8px;
-            color: white;
-            font-size: 12px;
+            gap: 5px;
             cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: 600;
-        }
-
-        .effect-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
-        }
-
-        .notification {
-            position: fixed;
-            top: 80px;
-            right: 25px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            padding: 15px 25px;
+            padding: 10px;
             border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
-            z-index: 1000;
-            transform: translateX(400px);
-            opacity: 0;
-            transition: all 0.4s ease;
+            transition: background 0.2s;
         }
 
-        .notification.show {
-            transform: translateX(0);
-            opacity: 1;
+        .toolbar-item:hover {
+            background: #333;
         }
 
-        .status-bar {
+        .toolbar-icon {
+            width: 24px;
+            height: 24px;
+            background: #666;
+            border-radius: 3px;
+        }
+
+        .toolbar-text {
+            font-size: 12px;
+            color: #999;
+        }
+
+        .modal {
             position: fixed;
-            bottom: 0;
+            top: 0;
             left: 0;
-            right: 0;
-            height: 3px;
-            background: #4a90e2;
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.3s ease;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
         }
 
-        .status-bar.loading {
-            animation: loading 2s ease-in-out infinite;
+        .modal-content {
+            background: #222;
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 500px;
+            width: 90%;
         }
 
-        @keyframes loading {
-            0%, 100% { transform: scaleX(0); }
-            50% { transform: scaleX(1); }
+        .modal h2 {
+            margin-bottom: 20px;
+            color: #00d4ff;
         }
 
-        @media (max-width: 768px) {
-            .container {
-                grid-template-columns: 1fr;
-                grid-template-rows: 60px 200px 1fr 150px;
-            }
-            
-            .media-panel, .properties-panel {
-                display: none;
-            }
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #ccc;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 10px;
+            background: #333;
+            border: 1px solid #555;
+            border-radius: 5px;
+            color: #fff;
+        }
+
+        .form-group input[type="range"] {
+            background: none;
+        }
+
+        .slider {
+            width: 100%;
+            height: 5px;
+            border-radius: 5px;
+            background: #333;
+            outline: none;
+        }
+
+        .slider::-webkit-slider-thumb {
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #00d4ff;
+            cursor: pointer;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+            margin-top: 20px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .btn-primary {
+            background: #00d4ff;
+            color: #000;
+        }
+
+        .btn-secondary {
+            background: #555;
+            color: #fff;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .project-card {
+            background: #333;
+            border-radius: 10px;
+            padding: 15px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .project-card:hover {
+            background: #444;
+        }
+
+        .project-thumbnail {
+            width: 100%;
+            height: 100px;
+            background: #555;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .project-info h3 {
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .project-info p {
+            font-size: 12px;
+            color: #999;
+        }
+
+        .upload-area {
+            border: 2px dashed #555;
+            border-radius: 10px;
+            padding: 40px;
+            text-align: center;
+            cursor: pointer;
+            transition: border-color 0.2s;
+        }
+
+        .upload-area:hover {
+            border-color: #00d4ff;
+        }
+
+        .upload-area.dragover {
+            border-color: #00d4ff;
+            background: rgba(0, 212, 255, 0.1);
+        }
+
+        .file-input {
+            display: none;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header class="header">
-            <div class="logo">
-                <span class="logo-icon">🎬</span>
-                <span>VideoEdit Pro</span>
+    <!-- Header -->
+    <div class="header">
+        <div class="header-left">
+            <button class="close-btn">✕</button>
+            <div class="search-bar">
+                <span>🔍</span>
+                <input type="text" placeholder="Rechercher..." id="searchInput">
             </div>
-            <div class="header-controls">
-                <button class="btn btn-secondary" onclick="newProject()">Nouveau</button>
-                <button class="btn btn-secondary" onclick="saveProject()">Sauvegarder</button>
-                <button class="btn" onclick="exportVideo()">Exporter</button>
-            </div>
-        </header>
+        </div>
+        <select class="quality-selector" id="qualitySelector">
+            <option>UHD par l'IA</option>
+            <option>1080p</option>
+            <option>720p</option>
+            <option>480p</option>
+        </select>
+        <button class="export-btn" onclick="openExportModal()">📤 Exporter</button>
+    </div>
 
-        <div class="media-panel">
-            <div class="section-title">📁 Médias</div>
-            <div class="upload-area" onclick="document.getElementById('fileInput').click()">
-                <span class="upload-icon">📤</span>
-                <div>Cliquez pour ajouter des médias</div>
-                <small style="color: #a0a0a0; margin-top: 5px; display: block;">Vidéos, images, audio</small>
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-item active" onclick="showProjects()">
+                <div class="sidebar-icon"></div>
+                <div class="sidebar-text">Projets</div>
             </div>
-            <input type="file" id="fileInput" multiple accept="video/*,image/*,audio/*" style="display: none;">
-            
-            <div class="media-grid" id="mediaGrid">
-                <!-- Médias ajoutés ici -->
+            <div class="sidebar-item" onclick="showEffects()">
+                <div class="sidebar-icon"></div>
+                <div class="sidebar-text">Effets</div>
             </div>
-
-            <div class="section-title">✨ Effets</div>
-            <div class="effects-grid">
-                <button class="effect-btn" onclick="applyEffect('blur')">🌫️ Flou</button>
-                <button class="effect-btn" onclick="applyEffect('sepia')">🟤 Sépia</button>
-                <button class="effect-btn" onclick="applyEffect('brightness')">☀️ Luminosité</button>
-                <button class="effect-btn" onclick="applyEffect('contrast')">⚡ Contraste</button>
-                <button class="effect-btn" onclick="applyEffect('saturate')">🌈 Saturation</button>
-                <button class="effect-btn" onclick="applyEffect('invert')">🔄 Inverser</button>
+            <div class="sidebar-item" onclick="showAudio()">
+                <div class="sidebar-icon"></div>
+                <div class="sidebar-text">Audio</div>
+            </div>
+            <div class="sidebar-item" onclick="showText()">
+                <div class="sidebar-icon"></div>
+                <div class="sidebar-text">Texte</div>
             </div>
         </div>
 
-        <div class="preview-area">
-            <div class="video-container">
-                <video id="previewVideo" class="preview-video" style="display: none;" controls></video>
-                <div id="previewPlaceholder" class="preview-placeholder">
-                    <div class="placeholder-icon">🎥</div>
-                    <div>Ajoutez un média pour commencer l'édition</div>
-                    <small style="opacity: 0.7;">Glissez-déposez vos fichiers ou utilisez le panneau de gauche</small>
+        <!-- Content Area -->
+        <div class="content-area">
+            <!-- Preview Area -->
+            <div class="preview-area">
+                <div class="preview-placeholder" id="previewArea">
+                    <div class="upload-area" onclick="document.getElementById('fileInput').click()">
+                        <p>Cliquez pour importer une vidéo</p>
+                        <p style="color: #666; font-size: 12px;">ou glissez-déposez ici</p>
+                    </div>
                 </div>
+                <video class="video-preview" id="videoPreview" controls style="display: none;"></video>
+                <input type="file" id="fileInput" class="file-input" accept="video/*" onchange="handleFileUpload(event)">
             </div>
-            <div class="controls-panel">
+
+            <!-- Controls -->
+            <div class="controls">
+                <button class="control-btn" onclick="skipBackward()">⏮</button>
                 <button class="play-btn" id="playBtn" onclick="togglePlay()">▶</button>
-                <span class="time-display" id="timeDisplay">00:00 / 00:00</span>
-                <div class="volume-control">
-                    <span>🔊</span>
-                    <input type="range" class="slider" id="volumeSlider" min="0" max="100" value="100" onchange="updateVolume(this.value)">
-                </div>
-            </div>
-        </div>
-
-        <div class="properties-panel">
-            <div class="property-group">
-                <h3>🎨 Apparence</h3>
-                <div class="property-item">
-                    <label>Opacité:</label>
-                    <input type="range" class="property-slider" min="0" max="100" value="100" onchange="updateProperty('opacity', this.value)">
-                </div>
-                <div class="property-item">
-                    <label>Luminosité:</label>
-                    <input type="range" class="property-slider" min="0" max="200" value="100" onchange="updateProperty('brightness', this.value)">
-                </div>
-                <div class="property-item">
-                    <label>Contraste:</label>
-                    <input type="range" class="property-slider" min="0" max="200" value="100" onchange="updateProperty('contrast', this.value)">
-                </div>
+                <button class="control-btn" onclick="skipForward()">⏭</button>
+                <button class="control-btn" onclick="toggleFullscreen()">⛶</button>
+                <button class="control-btn" onclick="undo()">↶</button>
+                <button class="control-btn" onclick="redo()">↷</button>
             </div>
 
-            <div class="property-group">
-                <h3>🎵 Audio</h3>
-                <div class="property-item">
-                    <label>Volume:</label>
-                    <input type="range" class="property-slider" min="0" max="100" value="100" onchange="updateVolume(this.value)">
+            <!-- Timeline Area -->
+            <div class="timeline-area">
+                <div class="timeline-header">
+                    <div class="time-display" id="timeDisplay">00:00 / 00:00</div>
+                    <div class="time-display" id="currentTime">00:00 • 00:01 •</div>
                 </div>
-                <div class="property-item">
-                    <label>Vitesse:</label>
-                    <input type="range" class="property-slider" min="25" max="200" value="100" onchange="updateSpeed(this.value)">
-                </div>
-            </div>
-
-            <div class="property-group">
-                <h3>📐 Transformation</h3>
-                <div class="property-item">
-                    <label>Échelle:</label>
-                    <input type="range" class="property-slider" min="50" max="200" value="100" onchange="updateProperty('scale', this.value)">
-                </div>
-                <div class="property-item">
-                    <label>Rotation:</label>
-                    <input type="range" class="property-slider" min="-180" max="180" value="0" onchange="updateProperty('rotation', this.value)">
-                </div>
-            </div>
-        </div>
-
-        <div class="timeline">
-            <div class="timeline-header">
-                <div class="section-title">⏱️ Timeline</div>
-                <div>
-                    <button class="btn btn-secondary" onclick="addTextLayer()">➕ Ajouter Texte</button>
-                </div>
-            </div>
-            <div class="timeline-content">
-                <div class="track">
-                    <div class="track-label">🎬 Vidéo</div>
-                    <div class="track-content" ondrop="dropHandler(event)" ondragover="allowDrop(event)">
-                        Glissez vos vidéos ici
-                    </div>
-                </div>
-                <div class="track">
-                    <div class="track-label">🎵 Audio</div>
-                    <div class="track-content" ondrop="dropHandler(event)" ondragover="allowDrop(event)">
-                        Glissez vos audios ici
-                    </div>
-                </div>
-                <div class="track">
-                    <div class="track-label">📝 Texte</div>
-                    <div class="track-content" id="textTrack">
-                        Cliquez pour ajouter du texte
-                    </div>
+                <div class="timeline" id="timeline">
+                    <div class="timeline-track" id="videoTrack"></div>
+                    <div class="timeline-track" id="audioTrack"></div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="status-bar" id="statusBar"></div>
+    <!-- Bottom Toolbar -->
+    <div class="bottom-toolbar">
+        <div class="toolbar-item" onclick="openFilters()">
+            <div class="toolbar-icon"></div>
+            <div class="toolbar-text">Filtres</div>
+        </div>
+        <div class="toolbar-item" onclick="openAdjustments()">
+            <div class="toolbar-icon"></div>
+            <div class="toolbar-text">Ajuster</div>
+        </div>
+        <div class="toolbar-item" onclick="openStickers()">
+            <div class="toolbar-icon"></div>
+            <div class="toolbar-text">Stickers</div>
+        </div>
+        <div class="toolbar-item" onclick="openAvatars()">
+            <div class="toolbar-icon"></div>
+            <div class="toolbar-text">Avatars IA</div>
+        </div>
+        <div class="toolbar-item" onclick="openMultimedia()">
+            <div class="toolbar-icon"></div>
+            <div class="toolbar-text">Fichier multimédia</div>
+        </div>
+        <div class="toolbar-item" onclick="openFormat()">
+            <div class="toolbar-icon"></div>
+            <div class="toolbar-text">Format</div>
+        </div>
+        <div class="toolbar-item" onclick="openBackground()">
+            <div class="toolbar-icon"></div>
+            <div class="toolbar-text">Arrière-plan</div>
+        </div>
+    </div>
+
+    <!-- Modals -->
+    <!-- Export Modal -->
+    <div class="modal" id="exportModal">
+        <div class="modal-content">
+            <h2>Exporter la vidéo</h2>
+            <div class="form-group">
+                <label>Résolution</label>
+                <select>
+                    <option>1080p (1920x1080)</option>
+                    <option>720p (1280x720)</option>
+                    <option>480p (854x480)</option>
+                    <option>2K/4K</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Fréquence d'images</label>
+                <input type="range" class="slider" min="24" max="60" value="30" id="fpsSlider">
+                <span id="fpsValue">30 FPS</span>
+            </div>
+            <div class="form-group">
+                <label>Vitesse de codage (Mbit/s)</label>
+                <input type="range" class="slider" min="1" max="50" value="25" id="bitrateSlider">
+                <span id="bitrateValue">Recommandée</span>
+            </div>
+            <p style="color: #666; font-size: 12px; margin-top: 20px;">
+                Taille estimée du fichier: <span id="estimatedSize">3 Mo</span>
+            </p>
+            <div class="btn-group">
+                <button class="btn btn-secondary" onclick="closeModal('exportModal')">Annuler</button>
+                <button class="btn btn-primary" onclick="startExport()">Exporter</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Projects Modal -->
+    <div class="modal" id="projectsModal">
+        <div class="modal-content" style="max-width: 800px;">
+            <h2>Mes Projets</h2>
+            <div class="project-grid">
+                <div class="project-card" onclick="loadProject('0821-01')">
+                    <div class="project-thumbnail" style="background: linear-gradient(45deg, #ff6b6b, #4ecdc4);"></div>
+                    <div class="project-info">
+                        <h3>0821-01</h3>
+                        <p>21/08/2025 20:35</p>
+                        <p>2MB | 00:20</p>
+                    </div>
+                </div>
+                <div class="project-card" onclick="loadProject('0818-04')">
+                    <div class="project-thumbnail" style="background: linear-gradient(45deg, #95e1d3, #fce38a);"></div>
+                    <div class="project-info">
+                        <h3>0818-04</h3>
+                        <p>19/08/2025 16:58</p>
+                        <p>5MB | 00:20</p>
+                    </div>
+                </div>
+                <div class="project-card" onclick="loadProject('0818-08')">
+                    <div class="project-thumbnail" style="background: linear-gradient(45deg, #a8e6cf, #88d8c0);"></div>
+                    <div class="project-info">
+                        <h3>0818-08</h3>
+                        <p>19/08/2025 15:49</p>
+                        <p>2MB | 00:20</p>
+                    </div>
+                </div>
+                <div class="project-card" onclick="loadProject('0818-10')">
+                    <div class="project-thumbnail" style="background: linear-gradient(45deg, #ff8a80, #ffab91);"></div>
+                    <div class="project-info">
+                        <h3>0818-10</h3>
+                        <p>19/08/2025 01:00</p>
+                        <p>5MB | 00:30</p>
+                    </div>
+                </div>
+            </div>
+            <div class="btn-group">
+                <button class="btn btn-primary" onclick="createNewProject()">+ Nouveau projet</button>
+                <button class="btn btn-secondary" onclick="closeModal('projectsModal')">Fermer</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Effects Modal -->
+    <div class="modal" id="effectsModal">
+        <div class="modal-content">
+            <h2>Effets</h2>
+            <div class="form-group">
+                <label>Luminosité</label>
+                <input type="range" class="slider" min="-100" max="100" value="0" id="brightnessSlider">
+            </div>
+            <div class="form-group">
+                <label>Contraste</label>
+                <input type="range" class="slider" min="-100" max="100" value="0" id="contrastSlider">
+            </div>
+            <div class="form-group">
+                <label>Saturation</label>
+                <input type="range" class="slider" min="-100" max="100" value="0" id="saturationSlider">
+            </div>
+            <div class="btn-group">
+                <button class="btn btn-secondary" onclick="resetEffects()">Réinitialiser</button>
+                <button class="btn btn-primary" onclick="applyEffects()">Appliquer</button>
+            </div>
+        </div>
+    </div>
 
     <script>
         let currentVideo = null;
         let isPlaying = false;
-        let currentEffects = {};
+        let currentProject = null;
+        let projects = JSON.parse(localStorage.getItem('videoProjects') || '[]');
 
-        // Initialisation
-        document.addEventListener('DOMContentLoaded', function() {
-            showNotification('🎉 Bienvenue dans VideoEdit Pro !');
-            setupEventListeners();
-        });
+        // File upload handling
+        function handleFileUpload(event) {
+            const file = event.target.files[0];
+            if (file && file.type.startsWith('video/')) {
+                const url = URL.createObjectURL(file);
+                const video = document.getElementById('videoPreview');
+                const placeholder = document.querySelector('.preview-placeholder');
+                
+                video.src = url;
+                video.style.display = 'block';
+                placeholder.style.display = 'none';
+                currentVideo = video;
 
-        function setupEventListeners() {
-            const fileInput = document.getElementById('fileInput');
-            fileInput.addEventListener('change', handleFileSelect);
-
-            // Drag & drop sur toute la page
-            document.addEventListener('dragover', function(e) {
-                e.preventDefault();
-                document.body.style.background = 'linear-gradient(135deg, #0f1419, #1a2332)';
-            });
-
-            document.addEventListener('dragleave', function(e) {
-                if (!e.relatedTarget) {
-                    document.body.style.background = '';
-                }
-            });
-
-            document.addEventListener('drop', function(e) {
-                e.preventDefault();
-                document.body.style.background = '';
-                handleFileDrop(e);
-            });
-        }
-
-        function handleFileSelect(event) {
-            const files = Array.from(event.target.files);
-            files.forEach(file => addMediaToLibrary(file));
-        }
-
-        function handleFileDrop(event) {
-            const files = Array.from(event.dataTransfer.files);
-            files.forEach(file => addMediaToLibrary(file));
-        }
-
-        function addMediaToLibrary(file) {
-            const mediaGrid = document.getElementById('mediaGrid');
-            const mediaI
+                // Add clip to timeline
+                addClipToTimeline(file.name, file.size);
+                
+                //
